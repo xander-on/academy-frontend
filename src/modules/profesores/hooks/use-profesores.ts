@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { getAllProfesoresAction } from "../actions/get-all-profesores.actions"
+import { createProfesorAction } from "../actions/create-profesor.action";
 
 
 export const useProfesores = () => {
@@ -11,7 +12,16 @@ export const useProfesores = () => {
   });
 
 
+  const createProfesorMutation = useMutation({
+    mutationFn: createProfesorAction,
+    onSuccess: () => {
+      allProfesoresQuery.refetch();
+    }
+  });
+
+
   return {
-    allProfesoresQuery
+    allProfesoresQuery,
+    createProfesorMutation
   }
 }
