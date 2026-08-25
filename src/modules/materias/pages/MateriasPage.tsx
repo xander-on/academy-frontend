@@ -1,6 +1,6 @@
 import { Button } from "@/modules/shared/libraries/shadcn/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/modules/shared/libraries/shadcn/components/ui/table";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useMaterias } from "../hooks/use-materias";
 
 export const MateriasPage = () => {
@@ -19,8 +19,8 @@ export const MateriasPage = () => {
 
   return (
     <div className="mt-6 mx-auto max-w-3xl">
-  
-        <div className="flex justify-between">
+        <Link to="/">Menu</Link>
+        <div className="flex justify-between mt-2">
           <h1 className="text-3xl font-bold">Materias</h1> 
           <Button
             onClick={ () => navigation("/materias/create") }

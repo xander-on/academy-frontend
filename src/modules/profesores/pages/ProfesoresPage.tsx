@@ -1,7 +1,7 @@
 import { Button } from "@shadcn/components/ui/button";
 import { useProfesores } from "../hooks/use-profesores";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/modules/shared/libraries/shadcn/components/ui/table";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export const ProfesoresPage = () => {
 
@@ -20,8 +20,8 @@ export const ProfesoresPage = () => {
 
   return (
     <div className="mt-6 mx-auto max-w-3xl">
-  
-        <div className="flex justify-between">
+        <Link to="/">Menu</Link>
+        <div className="flex justify-between mt-2">
           <h1 className="text-3xl font-bold">Profesores</h1> 
           <Button
             onClick={ () => navigation("/profesores/create") }
