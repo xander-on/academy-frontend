@@ -5,8 +5,13 @@ import { useNavigate } from "react-router";
 
 export const ProfesoresPage = () => {
 
-  const {allProfesoresQuery} = useProfesores();
+  const {allProfesoresQuery, deleteProfesorMutation} = useProfesores();
   const navigation = useNavigate();
+
+  const onDelete = (id: string) => {
+    deleteProfesorMutation.mutate(id);
+  }
+
   const profesores = allProfesoresQuery.data;
 
   if(!profesores && allProfesoresQuery.isLoading)
@@ -44,6 +49,7 @@ export const ProfesoresPage = () => {
                     <TableCell className="text-right">
                       <Button
                         variant={"destructive"}
+                        onClick={ () => onDelete(p.id) }
                       >Delete</Button>
                     </TableCell>
                   </TableRow>

@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { getAllProfesoresAction } from "../actions/get-all-profesores.actions"
 import { createProfesorAction } from "../actions/create-profesor.action";
+import { deleteProfesorAction } from "../actions/delete-profesor.action";
 
 
 export const useProfesores = () => {
@@ -19,9 +20,17 @@ export const useProfesores = () => {
     }
   });
 
+  const deleteProfesorMutation = useMutation({
+    mutationFn: deleteProfesorAction,
+    onSuccess: () => {
+      allProfesoresQuery.refetch();
+    }
+  });
+
 
   return {
     allProfesoresQuery,
-    createProfesorMutation
+    createProfesorMutation,
+    deleteProfesorMutation
   }
 }
