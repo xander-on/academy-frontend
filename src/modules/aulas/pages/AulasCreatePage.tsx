@@ -12,6 +12,9 @@ import { useMaterias } from "@/modules/materias/hooks/use-materias"
 
 const initForm = {
   name       : "",
+  topic      : "",
+  date       : "",
+  hour       : "",
   profesorId : "",
   materiaId  : ""
 }
@@ -31,13 +34,20 @@ export const AulasCreatePage = () => {
 
   const isValidForm = () => {
     return form.name.length > 0 
+      && form.topic.length > 0
+      && form.date.length > 0
+      && form.hour.length > 0
       && form.profesorId.length > 0 
       && form.materiaId.length > 0;
   }
 
   const onSaveAula = () => {
-    // console.log(form);
-    createAulaMutation.mutate(form);
+    console.log(form);
+    const payload = {
+      ...form,
+      hour : `${form.hour}:00`
+    }
+    createAulaMutation.mutate(payload);
     setForm(initForm);
     navigate("/aulas");
   }
@@ -50,6 +60,7 @@ export const AulasCreatePage = () => {
           <form>
             <div className="flex flex-col gap-6">
               <h1 className="text-3xl text-center">Crear Aula</h1>
+
               <div className="grid gap-2">
                 <Label>Nombre</Label>
                 <Input
@@ -58,6 +69,49 @@ export const AulasCreatePage = () => {
                   type="text"
                   required
                 />
+              </div>
+
+              <div className="grid gap-2">
+                <Label>Tema</Label>
+                <Input
+                  onChange={ (e) => setForm({...form, topic: e.target.value}) }
+                  value={ form.topic }
+                  type="text"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+
+                <div className="grid gap-2">
+                  <Label>Fecha</Label>
+                  
+                  <input
+                    className="w-full rounded-lg border-2 p-1.5 bg-zinc-800"
+                    type="date"
+                    id="date"
+                    name="date"
+                    value={ form.date }
+                    onChange={ (e) => setForm({...form, date: e.target.value}) }
+                    min={ new Date().toISOString().split("T")[0] }
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label>Hora</Label>
+                  <input
+                    className="w-full rounded-lg border-2 p-1.5 bg-zinc-800"
+                    type="time"
+                    value={ form.hour }
+                    onChange={ (e) => setForm({...form, hour: e.target.value}) }
+                    id="hour"
+                    name="hour"
+                    min="08:00"
+                    max="23:00"
+                    required 
+                  />
+                </div>
               </div>
 
               <div className="grid gap-2">
