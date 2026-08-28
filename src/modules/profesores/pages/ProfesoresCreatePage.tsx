@@ -16,8 +16,13 @@ const initForm = {
 export const ProfesoresCreatePage = () => {
 
   const { createProfesorMutation } = useProfesores();
-
   const navigate = useNavigate();
+
+  const isValidForm = () => {
+    return form.firstName.length > 0 
+      && form.lastName.length > 0 
+      && form.degree.length > 0;
+  }
 
   const onSaveProfesor = () => {
     createProfesorMutation.mutate(form);
@@ -79,6 +84,7 @@ export const ProfesoresCreatePage = () => {
             <Button 
               onClick={ onSaveProfesor }
               type="submit"
+              disabled={ !isValidForm() }
             >
               Guardar
             </Button>

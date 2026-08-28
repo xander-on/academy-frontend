@@ -5,16 +5,16 @@ import { Link, useNavigate } from "react-router";
 
 export const ProfesoresPage = () => {
 
-  const {allProfesoresQuery, deleteProfesorMutation} = useProfesores();
+  const { getProfesoresQuery, deleteProfesorMutation} = useProfesores();
   const navigation = useNavigate();
 
   const onDelete = (id: string) => {
     deleteProfesorMutation.mutate(id);
   }
 
-  const profesores = allProfesoresQuery.data;
+  const profesores = getProfesoresQuery.data;
 
-  if(!profesores && allProfesoresQuery.isLoading)
+  if(!profesores && getProfesoresQuery.isLoading)
     return <h1>Loading...</h1>
 
 

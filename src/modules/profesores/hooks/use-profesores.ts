@@ -6,7 +6,7 @@ import { deleteProfesorAction } from "../actions/delete-profesor.action";
 
 export const useProfesores = () => {
   
-  const allProfesoresQuery = useQuery({
+  const getProfesoresQuery = useQuery({
     queryKey: ['profesores'],
     queryFn: getAllProfesoresAction,
     staleTime: 1000 * 60 * 5
@@ -16,20 +16,20 @@ export const useProfesores = () => {
   const createProfesorMutation = useMutation({
     mutationFn: createProfesorAction,
     onSuccess: () => {
-      allProfesoresQuery.refetch();
+      getProfesoresQuery.refetch();
     }
   });
 
   const deleteProfesorMutation = useMutation({
     mutationFn: deleteProfesorAction,
     onSuccess: () => {
-      allProfesoresQuery.refetch();
+      getProfesoresQuery.refetch();
     }
   });
 
 
   return {
-    allProfesoresQuery,
+    getProfesoresQuery,
     createProfesorMutation,
     deleteProfesorMutation
   }
